@@ -15,3 +15,5 @@ Aplikace bude využívat Firebase k autentizaci učitelů, kterým se bude
 zobrazovat jiný obsah než studentům. Také bude využita databáze firestore k
 ukládání výsledků kvízu, které budou v aplikaci vhodně prezentovány. Aplikace
 bude také využívat React router a Typescript.
+
+Návrh (nedokončený): https://www.figma.com/file/h4tsHAznOayRQytzfMg9ii/UX-usability-quiz?node-id=0%3A1
