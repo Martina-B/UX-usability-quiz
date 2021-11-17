@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import Login from './Components/FormDemo';
 
 const App = () => (
 	<div className="App">
@@ -17,6 +18,7 @@ const App = () => (
 				Learn React
 			</a>
 		</header>
+		<Login />
 	</div>
 );
 
