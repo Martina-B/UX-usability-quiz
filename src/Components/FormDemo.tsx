@@ -1,34 +1,20 @@
 import { Button, Paper, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import { useRef, Ref } from 'react';
+import { useRef } from 'react';
+
+import useQuiz, { QuizItemRef, QuizItems } from '../Hooks/useQuiz';
 
 import QuizItem from './QuizItem';
 
-const QuizItemNames = ['PasswordTB', 'SignInBtn', 'SignInTxt'] as const;
-type Indexes = typeof QuizItemNames[number];
-type QuizItems = Record<Indexes, Ref<QuizItemRef>>;
-
-type QuizItemRef = {
-	isCorrect: boolean;
-	chosen: boolean;
-};
-
-const Login = () => {
-	const quizItems: QuizItems = {
+const FormDemo = () => {
+	// Create named quizItems
+	const quizItemRefs: QuizItems = {
 		PasswordTB: useRef<QuizItemRef>(null),
 		SignInBtn: useRef<QuizItemRef>(null),
 		SignInTxt: useRef<QuizItemRef>(null)
 	};
 
-	const evaluate = () => {
-		Object.keys(quizItems).forEach((key, value) => {
-			console.log(key);
-		});
-
-		Object.entries(quizItems).forEach((key, value) => {
-			console.log(key);
-		});
-	};
+	const { quizItems, evaluateQuiz } = useQuiz(quizItemRefs);
 
 	return (
 		<Paper
@@ -66,17 +52,17 @@ const Login = () => {
 				}}
 			>
 				<QuizItem ref={quizItems.SignInBtn} isCorrect={false}>
-					<Button type="submit" variant="contained">
+					<Button type="button" variant="contained">
 						SignIn
 					</Button>
 				</QuizItem>
 			</Box>
 
-			<Button type="button" onClick={evaluate}>
+			<Button type="button" onClick={evaluateQuiz}>
 				Evaluate Quiz (check console)
 			</Button>
 		</Paper>
 	);
 };
 
-export default Login;
+export default FormDemo;

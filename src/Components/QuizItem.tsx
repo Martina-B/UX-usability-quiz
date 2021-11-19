@@ -16,7 +16,7 @@ type Props = {
 
 const QuizItem: FC<Props> = forwardRef(
 	({ isCorrect, style, children }, ref) => {
-		const [chosen, setChosen] = useState(true);
+		const [chosen, setChosen] = useState(false);
 
 		useImperativeHandle(
 			ref,
