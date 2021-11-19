@@ -1,9 +1,9 @@
 import './App.css';
-import FormDemo from './Components/FormDemo';
+import Routes from './Components/Routes';
 
 const App = () => (
 	<div className="App">
-		<FormDemo />
+		<Routes />
 	</div>
 );
 
