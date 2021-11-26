@@ -1,4 +1,7 @@
 import { Ref, RefObject, useState } from 'react';
+import { addDoc, Timestamp } from 'firebase/firestore';
+
+import { resultsCollection } from '../utils/firebase';
 
 export type QuizItems = Record<string, Ref<QuizItemRef>>;
 
@@ -12,6 +15,7 @@ const useQuiz = (quizItemNames: QuizItems) => {
 
 	const evaluateQuiz = () => {
 		let correctlySelected = 0;
+		const mistakes: string[] = [];
 		Object.entries(quizItems).forEach(([k, v]) => {
 			const val = v as RefObject<QuizItemRef>;
 			const values = val.current;
@@ -25,9 +29,17 @@ const useQuiz = (quizItemNames: QuizItems) => {
 				(!values?.chosen && values?.isCorrect)
 			) {
 				correctlySelected++;
+			} else {
+				mistakes.push(k);
 			}
 		});
 		console.log(`Correctly selected UX elems: ${correctlySelected}`);
+		addDoc(resultsCollection, {
+			by: 'kokos',
+			date: Timestamp.now(),
+			mistakes,
+			points: (correctlySelected / Object.entries(quizItems).length) * 100
+		});
 		return correctlySelected;
 	};
 
