@@ -1,20 +1,23 @@
 import { FC, useEffect, useState } from 'react';
-import { Button, Typography } from '@mui/material';
+import { Button, Typography, CircularProgress } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { onSnapshot } from 'firebase/firestore';
 
 import { resultsCollection, Result } from '../utils/firebase';
 
 const Results: FC = () => {
+	const [loading, setLoading] = useState(false);
 	const [results, setResults] = useState<Result[]>([]);
 	const [statistics, setStatistics] = useState<string>();
 	const [mistakes, setMistakes] = useState<MistakesDictionary>({});
 
 	useEffect(() => {
+		setLoading(true);
 		// Call onSnapshot() to listen to changes
 		const unsubscribe = onSnapshot(resultsCollection, snapshot => {
 			// Access .docs property of snapshot
 			setResults(snapshot.docs.map(doc => doc.data()));
+			setLoading(false);
 		});
 		// Don't forget to unsubscribe from listening to changes
 		return () => {
@@ -52,40 +55,48 @@ const Results: FC = () => {
 	};
 
 	return (
-		<>
-			<Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-				UX Usability Quiz was taken{' '}
-				<Typography
-					variant="h6"
-					component="span"
-					sx={{ backgroundColor: 'contrast', fontWeight: 'bold' }}
-				>
-					{quizTaken}
-				</Typography>{' '}
-				times with average success rate{' '}
-				<Typography
-					variant="h6"
-					component="span"
-					sx={{ backgroundColor: 'contrast', fontWeight: 'bold' }}
-				>
-					{statistics}%
-				</Typography>
-				.
-			</Typography>
-			<Typography variant="h4" sx={{ textAlign: 'left', fontWeight: 'bold' }}>
-				Respondents made mistakens mainly in:
-			</Typography>
-			<ul className="listOfMistakes">
-				{Object.entries(mistakes).map(([m, index]) => (
-					<li key={index}>
-						<Typography variant="h5" sx={{ textAlign: 'left' }}>
-							{m} ({((mistakes[m] / quizTaken) * 100).toFixed(2)}
-							%)
+		<div>
+			{loading ? (
+				<CircularProgress sx={{ display: 'block', margin: 'auto' }} />
+			) : (
+				<>
+					<Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+						UX Usability Quiz was taken{' '}
+						<Typography
+							variant="h6"
+							component="span"
+							sx={{ backgroundColor: 'contrast', fontWeight: 'bold' }}
+						>
+							{quizTaken}
+						</Typography>{' '}
+						times with average success rate{' '}
+						<Typography
+							variant="h6"
+							component="span"
+							sx={{ backgroundColor: 'contrast', fontWeight: 'bold' }}
+						>
+							{statistics}%
 						</Typography>
-					</li>
-				))}
-			</ul>
-		</>
+					</Typography>
+					<Typography
+						variant="h4"
+						sx={{ textAlign: 'left', fontWeight: 'bold' }}
+					>
+						Respondents made mistakens mainly in:
+					</Typography>
+					<ul className="listOfMistakes">
+						{Object.entries(mistakes).map(([m, index]) => (
+							<li key={index}>
+								<Typography variant="h5" sx={{ textAlign: 'left' }}>
+									{m} ({((mistakes[m] / quizTaken) * 100).toFixed(2)}
+									%)
+								</Typography>
+							</li>
+						))}
+					</ul>
+				</>
+			)}
+		</div>
 	);
 };
 
