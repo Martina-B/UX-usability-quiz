@@ -7,6 +7,8 @@ import { resultsCollection, Result } from '../utils/firebase';
 
 const Results: FC = () => {
 	const [results, setResults] = useState<Result[]>([]);
+	const [statistics, setStatistics] = useState<string>();
+	const [mistakes, setMistakes] = useState<MistakesDictionary>({});
 
 	useEffect(() => {
 		// Call onSnapshot() to listen to changes
@@ -20,8 +22,28 @@ const Results: FC = () => {
 		};
 	}, []);
 
-	const getStatistics = () =>
-		results.reduce((value, res) => value + res.points, 0);
+	useEffect(() => {
+		setStatistics(
+			(
+				results.reduce((value, res) => value + res.points, 0) / results.length
+			).toFixed(2)
+		);
+	}, [results]);
+
+	useEffect(() => {
+		setMistakes(
+			results.reduce((result: MistakesDictionary, res) => {
+				for (const m of res.mistakes) {
+					if (result[m]) {
+						result[m] += 1;
+					} else {
+						result[m] = 1;
+					}
+				}
+				return result;
+			}, {})
+		);
+	}, [results]);
 
 	const quizTaken = results.length;
 
@@ -29,35 +51,37 @@ const Results: FC = () => {
 		[name: string]: number;
 	};
 
-	const mostCommonMistakes: MistakesDictionary = results.reduce(
-		(result: MistakesDictionary, res) => {
-			for (const m of res.mistakes) {
-				if (result[m]) {
-					result[m] += 1;
-				} else {
-					result[m] = 1;
-				}
-			}
-			return result;
-		},
-		{}
-	);
-
 	return (
 		<>
-			<Typography variant="h4">
-				UX Usability Quiz was taken {quizTaken} times with average success rate{' '}
-				{getStatistics()}&#37;!
+			<Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+				UX Usability Quiz was taken{' '}
+				<Typography
+					variant="h6"
+					component="span"
+					sx={{ backgroundColor: 'contrast', fontWeight: 'bold' }}
+				>
+					{quizTaken}
+				</Typography>{' '}
+				times with average success rate{' '}
+				<Typography
+					variant="h6"
+					component="span"
+					sx={{ backgroundColor: 'contrast', fontWeight: 'bold' }}
+				>
+					{statistics}%
+				</Typography>
+				.
 			</Typography>
-			<Typography>Respondents made mistakens mainly in:</Typography>
-			<ul className="list">
-				{Object.entries(mostCommonMistakes).map(([m, index]) => (
+			<Typography variant="h4" sx={{ textAlign: 'left', fontWeight: 'bold' }}>
+				Respondents made mistakens mainly in:
+			</Typography>
+			<ul className="listOfMistakes">
+				{Object.entries(mistakes).map(([m, index]) => (
 					<li key={index}>
-						{m}{' '}
-						{(mostCommonMistakes[m] /
-							Object.entries(mostCommonMistakes).length) *
-							100}
-						&#37;
+						<Typography variant="h5" sx={{ textAlign: 'left' }}>
+							{m} ({((mistakes[m] / quizTaken) * 100).toFixed(2)}
+							%)
+						</Typography>
 					</li>
 				))}
 			</ul>

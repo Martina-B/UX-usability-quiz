@@ -10,7 +10,7 @@ const Layout: FC = ({ children }) => {
 	return (
 		<>
 			<AppBar position="fixed">
-				<Container maxWidth="sm">
+				<Container maxWidth="md">
 					<Toolbar disableGutters sx={{ gap: 2 }}>
 						<Box sx={{ flexGrow: 1 }} />
 						<Button sx={{ color: 'white' }} component={Link} to="/">
@@ -35,13 +35,12 @@ const Layout: FC = ({ children }) => {
 			</AppBar>
 
 			<Container
-				maxWidth="sm"
+				maxWidth="md"
 				component="main"
 				sx={{
 					display: 'flex',
 					flexDirection: 'column',
 					justifyContent: 'center',
-					alignItems: 'center',
 					height: '100vh',
 					pt: 8,
 					gap: 2
