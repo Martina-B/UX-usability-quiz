@@ -5,6 +5,7 @@ import Login from '../Pages/Login';
 import Results from '../Pages/Results';
 
 import FormDemo from './FormDemo';
+import PaymentForm from './Quiz/PaymentForm';
 
 const Routes = () => (
 	<Switch>
@@ -12,6 +13,7 @@ const Routes = () => (
 		<Route path="/demo" exact component={FormDemo} />
 		<Route path="/login" exact component={Login} />
 		<Route path="/results" exact component={Results} />
+		<Route path="/quiz" exact component={PaymentForm} />
 	</Switch>
 );
 export default Routes;

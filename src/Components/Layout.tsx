@@ -35,8 +35,9 @@ const Layout: FC = ({ children }) => {
 			</AppBar>
 
 			<Container
-				maxWidth="sm"
+				maxWidth={false}
 				component="main"
+				disableGutters
 				sx={{
 					display: 'flex',
 					flexDirection: 'column',
