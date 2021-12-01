@@ -50,6 +50,7 @@ const db = getFirestore();
 export type Result = {
 	by: string;
 	mistakes: string[];
+	incorrectChoosen: number;
 	points: number;
 	date: Timestamp;
 };
@@ -58,3 +59,6 @@ export const resultsCollection = collection(
 	db,
 	'results'
 ) as CollectionReference<Result>;
+
+export const resultDocument = (id: string) =>
+	doc(db, 'results', id) as DocumentReference<Result>;
