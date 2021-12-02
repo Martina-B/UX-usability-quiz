@@ -3,6 +3,7 @@ import { addDoc, Timestamp } from 'firebase/firestore';
 import { useHistory } from 'react-router-dom';
 
 import { resultsCollection } from '../utils/firebase';
+import useLoggedInUser from '../Hooks/useLoggedInUser';
 
 export type QuizItems = Record<string, Ref<QuizItemRef>>;
 
@@ -12,6 +13,7 @@ export type QuizItemRef = {
 };
 
 const useQuiz = (quizItemNames: QuizItems) => {
+	const user = useLoggedInUser();
 	const { push } = useHistory();
 	const [quizItems] = useState<QuizItems>(quizItemNames);
 
@@ -42,7 +44,7 @@ const useQuiz = (quizItemNames: QuizItems) => {
 		console.log(`Correctly selected UX elems: ${correctlySelected}`);
 		try {
 			addDoc(resultsCollection, {
-				by: 'kokos',
+				by: user?.email,
 				date: Timestamp.now(),
 				mistakes,
 				incorrectChoosen: incorrectMarked,
