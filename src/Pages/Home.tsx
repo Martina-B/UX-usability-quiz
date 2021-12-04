@@ -1,5 +1,4 @@
 import { Box, Button, Typography } from '@mui/material';
-import { textAlign } from '@mui/system';
 import { Link } from 'react-router-dom';
 
 const Home = () => (
