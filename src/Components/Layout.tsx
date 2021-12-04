@@ -7,6 +7,13 @@ import { signOut } from '../utils/firebase';
 
 const Layout: FC = ({ children }) => {
 	const user = useLoggedInUser();
+
+	const useNielsenPage = () => {
+		window.open(
+			'https://www.nngroup.com/articles/ten-usability-heuristics/',
+			'_blank'
+		);
+	};
 	return (
 		<>
 			<AppBar position="fixed">
@@ -15,6 +22,9 @@ const Layout: FC = ({ children }) => {
 						<Box sx={{ flexGrow: 1 }} />
 						<Button sx={{ color: 'white' }} component={Link} to="/">
 							Home
+						</Button>
+						<Button sx={{ color: 'contrast' }} onClick={useNielsenPage}>
+							Read about Usability heuristics
 						</Button>
 						{user && (
 							<Button sx={{ color: 'white' }} component={Link} to="/results">
