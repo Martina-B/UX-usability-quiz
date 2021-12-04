@@ -1,6 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { Button, Typography, CircularProgress } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Typography, CircularProgress } from '@mui/material';
 import { onSnapshot } from 'firebase/firestore';
 
 import { resultsCollection, Result } from '../utils/firebase';

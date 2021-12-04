@@ -8,6 +8,7 @@ import NotFound from '../Pages/NotFound';
 import useLoggedInUser from '../Hooks/useLoggedInUser';
 
 import FormDemo from './FormDemo';
+import Quiz from './Quiz';
 
 const Routes = () => {
 	const user = useLoggedInUser();
@@ -19,6 +20,7 @@ const Routes = () => {
 			{!user && <Route path="/login" exact component={Login} />}
 			{user && <Route path="/results" exact component={Results} />}
 			{user && <Route path="/evaluation/:id" exact component={Evaluation} />}
+			<Route path="/quiz" exact component={Quiz} />
 			<Route component={NotFound} />
 		</Switch>
 	);
