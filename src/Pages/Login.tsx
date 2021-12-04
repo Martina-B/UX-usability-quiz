@@ -3,6 +3,7 @@ import { Box } from '@mui/system';
 import { FormEvent, useState } from 'react';
 import { useHistory } from 'react-router';
 
+import useField from '../Hooks/useField';
 import { signIn, signUp } from '../utils/firebase';
 
 const Login = () => {
@@ -10,8 +11,8 @@ const Login = () => {
 
 	const [isSignUp, setSignUp] = useState(false);
 
-	const [email, setEmail] = useState<string>('');
-	const [password, setPassword] = useState<string>('');
+	const [email, usernameProps] = useField('email', true);
+	const [password, passwordProps] = useField('password', true);
 
 	const [submitError, setSubmitError] = useState<string>();
 
@@ -42,16 +43,8 @@ const Login = () => {
 			<Typography variant="h4" component="h2" textAlign="center" mb={3}>
 				Log In
 			</Typography>
-			<TextField
-				label="email"
-				onChange={e => setEmail(e.target.value)}
-				type="email"
-			/>
-			<TextField
-				label="password"
-				onChange={e => setPassword(e.target.value)}
-				type="password"
-			/>
+			<TextField label="email" {...usernameProps} type="email" />
+			<TextField label="password" {...passwordProps} type="password" />
 			<Box
 				sx={{
 					display: 'flex',
