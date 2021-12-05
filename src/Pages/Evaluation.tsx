@@ -69,7 +69,7 @@ const Evaluation: FC = () => {
 									sx={{ backgroundColor: 'contrast', fontWeight: 'bold' }}
 								>
 									{' '}
-									{myResult.mistakes.length} / 7
+									{(myResult.points * 7) / 100} / 7
 								</Typography>{' '}
 								mistakes!
 							</Typography>
