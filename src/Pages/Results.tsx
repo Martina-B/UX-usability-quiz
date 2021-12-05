@@ -82,7 +82,7 @@ const Results: FC = () => {
 						variant="h4"
 						sx={{ textAlign: 'left', fontWeight: 'bold' }}
 					>
-						Respondents made mistakens mainly in:
+						Respondents made mistakes mainly in:
 					</Typography>
 					<ul className="listOfMistakes">
 						{Object.entries(mistakes).map(([m, index]) => (
