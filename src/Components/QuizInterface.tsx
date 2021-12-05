@@ -52,7 +52,9 @@ const QuizInterface: FC<Props> = ({ evaluateQuiz, quizPages }: Props) => {
 					<span style={{ fontSize: '15pt' }}>
 						<b>Is the design of this page OK?</b>
 					</span>
-					<span>If not please click on elements which seems off to you.</span>
+					<span>
+						If not please select elements which seems badly used to you.
+					</span>
 				</Box>
 			</Box>
 
