@@ -3,6 +3,7 @@ import { Typography, CircularProgress } from '@mui/material';
 import { onSnapshot } from 'firebase/firestore';
 
 import { resultsCollection, Result } from '../utils/firebase';
+import { itemNamesTranslations } from '../Constants/quizItemNames';
 
 const Results: FC = () => {
 	const [loading, setLoading] = useState(false);
@@ -87,7 +88,8 @@ const Results: FC = () => {
 						{Object.entries(mistakes).map(([m, index]) => (
 							<li key={index}>
 								<Typography variant="h5" sx={{ textAlign: 'left' }}>
-									{m} ({((mistakes[m] / quizTaken) * 100).toFixed(2)}
+									{itemNamesTranslations[m]} (
+									{((mistakes[m] / quizTaken) * 100).toFixed(2)}
 									%)
 								</Typography>
 							</li>
