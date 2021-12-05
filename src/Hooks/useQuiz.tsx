@@ -18,9 +18,6 @@ const useQuiz = (quizItemNames: QuizItems) => {
 	const [quizItems] = useState<QuizItems>(quizItemNames);
 
 	const evaluateQuiz = () => {
-		if (!user) {
-			return;
-		}
 		let correctlySelected = 0;
 		let incorrectMarked = 0;
 		const mistakes: string[] = [];
@@ -47,7 +44,7 @@ const useQuiz = (quizItemNames: QuizItems) => {
 		console.log(`Correctly selected UX elems: ${correctlySelected}`);
 		try {
 			addDoc(resultsCollection, {
-				by: user?.email,
+				by: user ? user?.email : 'anonymous',
 				date: Timestamp.now(),
 				mistakes,
 				incorrectChoosen: incorrectMarked,
