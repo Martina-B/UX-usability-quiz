@@ -4,11 +4,11 @@ import { FC } from 'react';
 import BathtubIcon from '@mui/icons-material/Bathtub';
 import CancelPresentationIcon from '@mui/icons-material/CancelPresentation';
 
-import { QuizItems } from '../../Hooks/useQuiz';
+import { QuizItemRefs } from '../../Hooks/useQuiz';
 import QuizItem from '../QuizItem';
 
 type Props = {
-	quizItems: QuizItems;
+	quizItems: QuizItemRefs;
 };
 
 const PaymentModal: FC<Props> = ({ quizItems }: Props) => (

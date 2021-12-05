@@ -1,6 +1,10 @@
 import { useRef } from 'react';
 
-import useQuiz, { QuizItemRef, QuizItems } from '../Hooks/useQuiz';
+import useQuiz, {
+	QuizItemRef,
+	QuizItemRefs,
+	QuizItems
+} from '../Hooks/useQuiz';
 
 import QuizInterface from './QuizInterface';
 import ErrorModal from './QuizPages/ErrorModal';
@@ -8,20 +12,20 @@ import PaymentForm from './QuizPages/PaymentForm';
 import PaymentModal from './QuizPages/PaymentModal';
 
 const QuizContainer = () => {
-	const PaymentModalItemRefs: QuizItems = {
+	const PaymentModalItemRefs: QuizItemRefs = {
 		SendBtn: useRef<QuizItemRef>(null),
 		PaymentModalText: useRef<QuizItemRef>(null),
 		BathIcon: useRef<QuizItemRef>(null),
 		CloseBtn: useRef<QuizItemRef>(null)
 	};
 
-	const errorModalItemRefs: QuizItems = {
+	const errorModalItemRefs: QuizItemRefs = {
 		DeleteBtn: useRef<QuizItemRef>(null),
 		ErrorModalText: useRef<QuizItemRef>(null),
 		SmileIcon: useRef<QuizItemRef>(null)
 	};
 
-	const paymentFormItemRefs: QuizItems = {
+	const paymentFormItemRefs: QuizItemRefs = {
 		Header: useRef<QuizItemRef>(null),
 		BulletPoint1: useRef<QuizItemRef>(null),
 		BulletPoint2: useRef<QuizItemRef>(null),
@@ -38,21 +42,31 @@ const QuizContainer = () => {
 		CardCountryTB: useRef<QuizItemRef>(null)
 	};
 
-	const quizItemRefs = {
-		...PaymentModalItemRefs,
-		...errorModalItemRefs,
-		...paymentFormItemRefs
-	};
-
 	const quizPages: JSX.Element[] = [
-		<PaymentForm key={1} quizItems={quizItemRefs} />,
-		<PaymentModal key={2} quizItems={quizItemRefs} />,
-		<ErrorModal key={3} quizItems={quizItemRefs} />
+		<PaymentForm key={1} quizItems={paymentFormItemRefs} />,
+		<PaymentModal key={2} quizItems={PaymentModalItemRefs} />,
+		<ErrorModal key={3} quizItems={errorModalItemRefs} />
 	];
 
-	const { evaluateQuiz } = useQuiz(quizItemRefs);
+	const { evaluateQuiz } = useQuiz();
 
-	return <QuizInterface evaluateQuiz={evaluateQuiz} quizPages={quizPages} />;
+	let quizItems: QuizItems = {};
+
+	const updateResults = (items: QuizItems) => {
+		quizItems = { ...quizItems, ...items };
+	};
+
+	const submitResults = () => {
+		evaluateQuiz(quizItems);
+	};
+
+	return (
+		<QuizInterface
+			evaluateQuiz={submitResults}
+			updateResults={updateResults}
+			quizPages={quizPages}
+		/>
+	);
 };
 
 export default QuizContainer;

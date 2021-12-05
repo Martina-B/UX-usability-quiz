@@ -2,11 +2,11 @@ import { Button, Paper, TextField, FormLabel } from '@mui/material';
 import { Box } from '@mui/system';
 import { FC } from 'react';
 
-import { QuizItems } from '../../Hooks/useQuiz';
+import { QuizItemRefs } from '../../Hooks/useQuiz';
 import QuizItem from '../QuizItem';
 
 type Props = {
-	quizItems: QuizItems;
+	quizItems: QuizItemRefs;
 };
 
 const PaymentForm: FC<Props> = ({ quizItems }: Props) => (
@@ -14,7 +14,7 @@ const PaymentForm: FC<Props> = ({ quizItems }: Props) => (
 		component="div"
 		sx={{
 			display: 'flex',
-			flexDirection: 'row',
+			flexDirection: { xs: 'column', md: 'row' },
 			alignSelf: 'center',
 			width: '100%',
 			height: '100%',

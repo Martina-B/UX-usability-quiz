@@ -4,10 +4,10 @@ import { FC } from 'react';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 
 import QuizItem from '../QuizItem';
-import { QuizItems } from '../../Hooks/useQuiz';
+import { QuizItemRefs } from '../../Hooks/useQuiz';
 
 type Props = {
-	quizItems: QuizItems;
+	quizItems: QuizItemRefs;
 };
 
 const ErrorModal: FC<Props> = ({ quizItems }: Props) => (

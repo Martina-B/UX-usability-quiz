@@ -1,14 +1,38 @@
 import { Button, Paper } from '@mui/material';
 import { Box } from '@mui/system';
-import { FC, useState } from 'react';
+import { FC, RefObject, useState } from 'react';
+
+import { QuizItemRef, QuizItems } from '../Hooks/useQuiz';
 
 type Props = {
 	evaluateQuiz: () => void;
+	updateResults: (items: QuizItems) => void;
 	quizPages: JSX.Element[];
 };
 
-const QuizInterface: FC<Props> = ({ evaluateQuiz, quizPages }: Props) => {
+const QuizInterface: FC<Props> = ({
+	evaluateQuiz,
+	quizPages,
+	updateResults
+}: Props) => {
 	const onNextPage = () => {
+		const quizPageItemsRefs = quizPages[currentPage - 1].props.quizItems;
+		const quizPageItems: QuizItems = {};
+
+		Object.entries(quizPageItemsRefs).forEach(([k, v]) => {
+			const val = v as RefObject<QuizItemRef>;
+			const values: QuizItemRef = val.current
+				? val.current
+				: {
+						isCorrect: true,
+						chosen: false
+				  };
+
+			quizPageItems[k] = values;
+		});
+
+		updateResults(quizPageItems);
+
 		if (currentPage === totalPages) {
 			evaluateQuiz();
 			return;

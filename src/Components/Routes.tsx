@@ -7,7 +7,6 @@ import Evaluation from '../Pages/Evaluation';
 import NotFound from '../Pages/NotFound';
 import useLoggedInUser from '../Hooks/useLoggedInUser';
 
-import FormDemo from './FormDemo';
 import QuizContainer from './QuizContainer';
 
 const Routes = () => {
@@ -16,7 +15,6 @@ const Routes = () => {
 	return (
 		<Switch>
 			<Route path="/" exact render={() => <Home />} />
-			<Route path="/demo" exact component={FormDemo} />
 			{!user && <Route path="/login" exact component={Login} />}
 			{user && <Route path="/results" exact component={Results} />}
 			<Route path="/evaluation/:id" exact component={Evaluation} />
