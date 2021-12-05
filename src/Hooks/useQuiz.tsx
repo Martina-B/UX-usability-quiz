@@ -24,31 +24,26 @@ const useQuiz = (quizItemNames: QuizItems) => {
 		Object.entries(quizItems).forEach(([k, v]) => {
 			const val = v as RefObject<QuizItemRef>;
 			const values = val.current;
-
-			console.log(
-				`${k} is selected: ${values?.chosen} and is correct UX element: ${values?.isCorrect}`
-			);
-
-			if (
-				(values?.chosen && values?.isCorrect) ||
-				(!values?.chosen && !values?.isCorrect)
-			) {
-				correctlySelected++;
+			console.log(k, values);
+			if (values === null) {
+				//SKIP
 			} else if (values?.chosen && !values?.isCorrect) {
+				correctlySelected++;
+			} else if (!!values && values?.chosen && values?.isCorrect) {
 				incorrectMarked++;
 				mistakes.push(k);
-			} else {
+			} else if (!!values && !values?.chosen && !values?.isCorrect) {
 				mistakes.push(k);
 			}
 		});
-		console.log(`Correctly selected UX elems: ${correctlySelected}`);
 		try {
+			console.log(correctlySelected);
 			addDoc(resultsCollection, {
 				by: user ? user?.email : 'anonymous',
 				date: Timestamp.now(),
 				mistakes,
 				incorrectChoosen: incorrectMarked,
-				points: (correctlySelected / Object.entries(quizItems).length) * 100
+				points: (correctlySelected / 7) * 100
 			}).then(res => push(`/evaluation/${res.id}`));
 		} catch (err) {
 			console.log(err);
