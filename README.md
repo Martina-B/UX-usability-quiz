@@ -17,4 +17,5 @@ ukládání výsledků kvízu, které budou v aplikaci vhodně prezentovány. Ap
 bude také využívat React router a Typescript.
 
 Návrh: https://www.figma.com/file/h4tsHAznOayRQytzfMg9ii/UX-usability-quiz?node-id=0%3A1
+
 Webová stránka: https://ux-usability-quiz.web.app/
