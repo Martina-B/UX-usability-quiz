@@ -19,27 +19,20 @@ const useQuiz = () => {
 
 	const evaluateQuiz = (quizItems: QuizItems) => {
 		let correctlySelected = 0;
-		const incorrectMarked = 0;
+		let incorrectMarked = 0;
 		const mistakes: string[] = [];
 		Object.entries(quizItems).forEach(([k, v]) => {
 			const values = v as QuizItemRef;
 
-			console.log(
-				`${k} is selected: ${values?.chosen} and is correct UX element: ${values?.isCorrect}`
-			);
-
-			if (
-				(values?.chosen && values?.isCorrect) ||
-				(!values?.chosen && !values?.isCorrect)
-			) {
-				correctlySelected++;
+			if (values === null) {
+				//SKIP
 			} else if (values?.chosen && !values?.isCorrect) {
 				correctlySelected++;
-				// } else if (!!values && values?.chosen && values?.isCorrect) {
-				// 	incorrectMarked++;
-				// 	mistakes.push(k);
-				// } else if (!!values && !values?.chosen && !values?.isCorrect) {
-				// 	mistakes.push(k);
+			} else if (!!values && values?.chosen && values?.isCorrect) {
+				incorrectMarked++;
+				mistakes.push(k);
+			} else if (!!values && !values?.chosen && !values?.isCorrect) {
+				mistakes.push(k);
 			}
 		});
 		try {
