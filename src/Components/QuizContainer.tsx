@@ -46,11 +46,11 @@ const QuizContainer = () => {
 
 	const quizPages: JSX.Element[] = [
 		<PaymentForm key={1} quizItems={quizItemRefs} />,
-		<PaymentModal key={1} quizItems={quizItemRefs} />,
-		<ErrorModal key={2} quizItems={quizItemRefs} />
+		<PaymentModal key={2} quizItems={quizItemRefs} />,
+		<ErrorModal key={3} quizItems={quizItemRefs} />
 	];
 
-	const { quizItems, evaluateQuiz } = useQuiz(quizItemRefs);
+	const { evaluateQuiz } = useQuiz(quizItemRefs);
 
 	return <QuizInterface evaluateQuiz={evaluateQuiz} quizPages={quizPages} />;
 };
