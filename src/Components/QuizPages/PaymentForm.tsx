@@ -24,8 +24,8 @@ const PaymentForm: FC<Props> = ({ quizItems }: Props) => (
 	>
 		<Box
 			sx={{
-				maxWidth: '50%',
-				width: '50%',
+				maxWidth: { xs: '100%', md: '50%' },
+				width: { xs: '100%', md: '50%' },
 				height: '100%',
 				background: 'linear-gradient(90deg, #FFDB1D, #A87B00)',
 				display: 'flex',
@@ -66,8 +66,10 @@ const PaymentForm: FC<Props> = ({ quizItems }: Props) => (
 
 		<Box
 			sx={{
-				maxWidth: '50%',
-				width: '50%',
+				maxWidth: { xs: '100%', md: '50%' },
+				marginTop: { xs: '40px', md: '0px' },
+				marginBottom: { xs: '40px', md: '0px' },
+				width: { xs: '100%', md: '50%' },
 				display: 'flex',
 				alignItems: 'center',
 				justifyContent: 'center'

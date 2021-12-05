@@ -82,7 +82,15 @@ const QuizInterface: FC<Props> = ({
 				</Box>
 			</Box>
 
-			<Box sx={{ height: '80%' }}>{quizPages[currentPage - 1]}</Box>
+			<Box
+				sx={{
+					height: { xs: 'auto', md: '80%' },
+					marginTop: { xs: 'auto', md: '0px' },
+					marginBottom: { xs: 'auto', md: '0px' }
+				}}
+			>
+				{quizPages[currentPage - 1]}
+			</Box>
 
 			<Box
 				sx={{
