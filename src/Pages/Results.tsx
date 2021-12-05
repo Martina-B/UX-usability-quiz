@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { Typography, CircularProgress } from '@mui/material';
+import { Container, Typography, CircularProgress } from '@mui/material';
 import { onSnapshot } from 'firebase/firestore';
 
 import { resultsCollection, Result } from '../utils/firebase';
@@ -55,11 +55,11 @@ const Results: FC = () => {
 	};
 
 	return (
-		<div>
+		<Container sx={{ height: '80%' }}>
 			{loading ? (
 				<CircularProgress sx={{ display: 'block', margin: 'auto' }} />
 			) : (
-				<>
+				<Container maxWidth="md">
 					<Typography variant="h6" sx={{ fontWeight: 'bold' }}>
 						UX Usability Quiz was taken{' '}
 						<Typography
@@ -95,9 +95,9 @@ const Results: FC = () => {
 							</li>
 						))}
 					</ul>
-				</>
+				</Container>
 			)}
-		</div>
+		</Container>
 	);
 };
 
