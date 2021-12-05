@@ -13,7 +13,7 @@ const Home = () => (
 	>
 		<Button
 			component={Link}
-			to="/demo"
+			to="/quiz"
 			fullWidth
 			sx={{
 				'color': 'text.primary',

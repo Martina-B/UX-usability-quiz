@@ -47,6 +47,7 @@ const Layout: FC = ({ children }) => {
 			<Container
 				maxWidth={false}
 				component="main"
+				disableGutters
 				sx={{
 					display: 'flex',
 					flexDirection: 'column',

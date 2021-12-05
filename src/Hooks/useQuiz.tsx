@@ -18,6 +18,9 @@ const useQuiz = (quizItemNames: QuizItems) => {
 	const [quizItems] = useState<QuizItems>(quizItemNames);
 
 	const evaluateQuiz = () => {
+		if (!user) {
+			return;
+		}
 		let correctlySelected = 0;
 		let incorrectMarked = 0;
 		const mistakes: string[] = [];
@@ -53,7 +56,6 @@ const useQuiz = (quizItemNames: QuizItems) => {
 		} catch (err) {
 			console.log(err);
 		}
-		return correctlySelected;
 	};
 
 	return { quizItems, evaluateQuiz };
